@@ -9,6 +9,12 @@ const mongoose = require('mongoose');
 const authMiddleware = require('./middleware/auth');
 dotenv.config();
 const port = process.env.port || 3000;
+const cors = require('cors');
+app.use(cors(
+    {
+        origin: "*"
+    }
+));
 
 
 
@@ -29,7 +35,7 @@ app.use((req, res, next) =>{
 });
 
 
-app.use('/v1/job', authMiddleware, jobRoute);
+app.use('/v1/job', jobRoute);
 app.use('/v1/auth', authRoute);
 
 app.use((err, req, res, next) =>{
